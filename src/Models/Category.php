@@ -16,7 +16,7 @@ class Category extends Node
 
     public static function toJqTree()
     {
-        return self::join('category_translations as t', 't.category_id', '=', 'categories.id')
+        return self::select('categories.id as id', 't.category_id', 't.slug', 't.name', 'categories.icon', 'categories.parent_id', 'categories._lft', 'categories._rgt')
             ->defaultOrder()->where('locale', '=', config('app.locale'))->get()->toTree();
     }
 
