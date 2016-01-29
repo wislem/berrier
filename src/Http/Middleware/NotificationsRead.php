@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Wislem\Berrier\Http\Middleware;
 
-use App\Models\Notification;
 use Closure;
 
 class NotificationsRead
