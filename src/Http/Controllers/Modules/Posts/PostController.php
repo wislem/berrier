@@ -50,14 +50,14 @@ class PostController extends Controller
 //        $results = $this->post->search($searchPhrase);
 
         $results = $this->post->join('post_translations as t', 't.post_id', '=', 'post_id')->where('locale', '=', config('app.locale'));
+
         if($searchPhrase) {
-            $results = $results->with('categories')->select('id', 'title', 'slug', 'is_active', 'created_at', 'updated_at')
+            $results = $results->with('categories')
                 ->where('slug', 'like', '%' . $searchPhrase . '%')
                 ->orWhere('title', 'like', '%' . $searchPhrase . '%')
                 ->orWhere('content', 'like', '%' . $searchPhrase . '%');
-        }else {
-            $results = $results->with('categories')->select('id', 'title', 'slug', 'is_active', 'created_at', 'updated_at');
         }
+
         $count_results = $results->count();
         $results = $results->take($take)->skip($take * $skip);
 

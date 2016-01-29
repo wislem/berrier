@@ -14,6 +14,7 @@ class CreatePostTranslationsTable extends Migration {
 	{
 		Schema::create('post_translations', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->integer('post_id')->unsigned()->nullable();
 			$table->string('slug')->nullable()->index('slug');
 			$table->string('title')->nullable();

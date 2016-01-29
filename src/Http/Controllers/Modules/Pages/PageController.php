@@ -48,13 +48,10 @@ class PageController extends Controller
 
         $results = $this->page->join('page_translations as t', 't.page_id', '=', 'page_id')->where('locale', '=', config('app.locale'));
         if($searchPhrase) {
-            $results = $results->select('id', 'title', 'slug', 'is_active', 'created_at', 'updated_at')
-                ->where('slug', 'like', '%' . $searchPhrase . '%')
+            $results = $results->where('slug', 'like', '%' . $searchPhrase . '%')
                 ->orWhere('title', 'like', '%' . $searchPhrase . '%')
                 ->orWhere('content', 'like', '%' . $searchPhrase . '%')
                 ->where;
-        }else {
-            $results = $results->select('id', 'title', 'slug', 'is_active', 'created_at', 'updated_at');
         }
 
         $count_results = $results->count();

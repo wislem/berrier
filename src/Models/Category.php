@@ -19,7 +19,7 @@ class Category extends Node
         return self::join('category_translations as t', 't.category_id', '=', 'categories.id')
             ->defaultOrder()->where('locale', '=', config('app.locale'))->get()->toTree();
     }
-    
+
     public function widgets()
     {
         return $this->morphToMany(Widget::class, 'widgetable');
