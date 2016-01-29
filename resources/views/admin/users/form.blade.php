@@ -1,4 +1,3 @@
-{!! BootForm::open(['model' => $user, 'store' => '\Wislem\Berrier\Http\Controllers\Modules\UserController@store', 'update' => '\Wislem\Berrier\Http\Controllers\Modules\UserController@update']) !!}
 @if($user)
 {!! BootForm::open()->action('/admin/users/' . $user->id)->put() !!}
 {!! BootForm::bind($user) !!}
