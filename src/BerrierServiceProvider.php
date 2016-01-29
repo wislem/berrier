@@ -16,8 +16,6 @@ class BerrierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require __DIR__ . '/../vendor/autoload.php';
-
         // Load routes if app is not caching routes.
         if (!$this->app->routesAreCached()) {
             require __DIR__.'/Http/routes.php';
