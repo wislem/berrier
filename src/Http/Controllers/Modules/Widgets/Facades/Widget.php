@@ -44,6 +44,8 @@ class Widget
 
         $unit = $out[1];
 
+        $result = [];
+
         foreach($unit as $widget) {
             $split = explode(':', $widget);
             $db_widget = \Wislem\Berrier\Models\Widget::find($split[1]);
