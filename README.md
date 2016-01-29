@@ -18,7 +18,7 @@ Via Composer
 $ composer require wislem/berrier
 ```
 
-## Usage
+## Main Setup steps
 
 #### Step 1
 Add
@@ -45,6 +45,9 @@ Change ```App\User::class``` to ```Wislem\Berrier\Models\User::class``` inside `
 Log in ```http://your.path/admin``` using
 Email: admin@example.com
 Password: admin
+
+#### Step 8
+Make sure to check the published ```config/berrier.php``` file for more options.
 
 ## Enjoy!
 
