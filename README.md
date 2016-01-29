@@ -29,7 +29,7 @@ to your ```config/app.php``` file
 
 #### Step 2
 Publish various files needed
-```php artisan vendor:publish --tag=berrier --force```
+```php artisan vendor:publish```
 
 #### Step 4
 Run ```composer dump-autoload```
@@ -47,6 +47,15 @@ Email: admin@example.com
 Password: admin
 
 #### Step 8
+Edit the locales inside ```config/translatable.php``` to look like this
+``` php
+    'locales' => [
+        'en',
+        'el',
+        'de',
+    ],
+```
+since Berrier has these locales upon setup.
 Make sure to check the published ```config/berrier.php``` file for more options.
 
 ## Enjoy!
