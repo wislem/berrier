@@ -20,10 +20,33 @@ $ composer require wislem/berrier
 
 ## Usage
 
+#### Step 1
+Add
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+Wislem\Berrier\BerrierServiceProvider::class
 ```
+to your ```config/app.php``` file
+
+#### Step 2
+Publish various files needed
+```php artisan vendor:publish --tag=berrier --force```
+
+#### Step 4
+Run ```composer dump-autoload```
+
+#### Step 5
+Run ```php artisan migrate```
+Run ```php artisan db:seed```
+
+#### Step 6
+Change ```App\User::class``` to ```Wislem\Berrier\Models\User::class``` inside ```config/auth.php```
+
+#### Step 7
+Log in ```http://your.path/admin``` using
+Email: admin@example.com
+Password: admin
+
+## Enjoy!
 
 ## Change log
 
