@@ -50,8 +50,7 @@ class PageController extends Controller
         if($searchPhrase) {
             $results = $results->where('slug', 'like', '%' . $searchPhrase . '%')
                 ->orWhere('title', 'like', '%' . $searchPhrase . '%')
-                ->orWhere('content', 'like', '%' . $searchPhrase . '%')
-                ->where;
+                ->orWhere('content', 'like', '%' . $searchPhrase . '%');
         }
 
         $count_results = $results->count();
