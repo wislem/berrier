@@ -68,6 +68,9 @@ Edit the locales inside ```config/translatable.php``` to look like this
     ],
 ```
 since Berrier has these locales upon setup.
+Also change the config('app.url') to your proper url so that you can move to your
+website through Berrier's list pages.
+
 Make sure to check the published ```config/berrier.php``` file for more options.
 
 ## Enjoy!
