@@ -35,11 +35,23 @@ Publish various files needed
 Run ```composer dump-autoload```
 
 #### Step 5
+Delete default migrations of Laravel 5 inside ```database/migrations```
 Run ```php artisan migrate```
 Run ```php artisan db:seed```
 
 #### Step 6
-Change ```App\User::class``` to ```Wislem\Berrier\Models\User::class``` inside ```config/auth.php```
+In your User model, delete this line
+```php
+use Illuminate\Foundation\Auth\User as Authenticatable;
+```
+and change
+```php
+class User extends Authenticatable 
+```
+to
+```php
+class User extends \Wislem\Berrier\Models\User
+```
 
 #### Step 7
 Log in ```http://your.path/admin``` using
