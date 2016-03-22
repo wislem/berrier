@@ -29,8 +29,7 @@ class UpdateSettingRequest extends Request
     {
         return [
             'name' => 'required|unique:settings,name,' . $this->route('settings'),
-            'key' => 'required|unique:settings,key,' . $this->route('settings'),
-            'value' => 'required'
+            'key' => 'required|unique:settings,key,' . $this->route('settings')
         ];
     }
 }

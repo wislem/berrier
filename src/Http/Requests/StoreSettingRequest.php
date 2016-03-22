@@ -29,8 +29,7 @@ class StoreSettingRequest extends Request
     {
         return [
             'name' => 'required|unique:settings,name',
-            'key' => 'required|unique:settings,key',
-            'value' => 'required'
+            'key' => 'required|unique:settings,key'
         ];
     }
 }
