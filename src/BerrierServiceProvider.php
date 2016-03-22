@@ -23,10 +23,7 @@ class BerrierServiceProvider extends ServiceProvider
 
         // Load Package Middleware
         $kernel = app('Illuminate\Contracts\Http\Kernel');
-        $kernel->pushMiddleware('Illuminate\Session\Middleware\StartSession');
-        $kernel->pushMiddleware('Illuminate\View\Middleware\ShareErrorsFromSession');
         $kernel->pushMiddleware('Wislem\Berrier\Http\Middleware\MenuMiddleware');
-        $kernel->pushMiddleware('Wislem\Berrier\Http\Middleware\NotificationsRead');
         $this->app['router']->middleware('berrier.auth', 'Wislem\Berrier\Http\Middleware\BerrierAuth');
 
         // Register Service providers
