@@ -102,7 +102,7 @@ class UserController extends Controller
     public function create()
     {
         $user = null;
-        $settings = UserSetting::select('id', 'name', 'key', 'default')->orderBy('key', 'DESC')->get();
+        $settings = UserSetting::select('id', 'name', 'key', 'default', 'user_editable')->orderBy('key', 'DESC')->get();
 
         return view('berrier::admin.users.create')->with(compact('user'))->with(compact('settings'));
     }
@@ -146,7 +146,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->with('settings')->whereId($id)->first();
-        $settings = UserSetting::select('id', 'name', 'key', 'default')->orderBy('key', 'DESC')->get();
+        $settings = UserSetting::select('id', 'name', 'key', 'default', 'user_editable')->orderBy('key', 'DESC')->get();
 
         return view('berrier::admin.users.edit')->with(compact('user'))->with(compact('settings'));
     }

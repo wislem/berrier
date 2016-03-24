@@ -62,7 +62,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{url('admin/users/edit/'.$user->id)}}" class="btn btn-default btn-flat">Settings</a>
+                                <a href="{{url('admin/users/'.$user->id.'/edit')}}" class="btn btn-default btn-flat">Settings</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{url('admin/auth/logout')}}" class="btn btn-default btn-flat">Sign out</a>

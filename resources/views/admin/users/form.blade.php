@@ -1,8 +1,8 @@
 @if($user)
-{!! BootForm::open()->action('/admin/users/' . $user->id)->put() !!}
-{!! BootForm::bind($user) !!}
+    {!! BootForm::open()->action('/admin/users/' . $user->id)->put() !!}
+    {!! BootForm::bind($user) !!}
 @else
-{!! BootForm::open()->action('/admin/users') !!}
+    {!! BootForm::open()->action('/admin/users') !!}
 @endif
 
 <div class="box-body">
@@ -25,7 +25,15 @@
         <div class="col-xs-12 col-md-5">
             <h3 class="text-primary">User settings</h3>
             @foreach($settings as $setting)
-                {!! BootForm::text($setting->name, 'settings['.$setting->id.']', (!$user) ? $setting->default : $user->settings()->whereId($setting->id)->pluck('value')) !!}
+                @if($setting->user_editable)
+                    {!! BootForm::text($setting->name, 'settings['.$setting->id.']', (!$user) ? $setting->default : $user->settings()->whereUsettingId($setting->id)->first()->value) !!}
+                @else
+                    @if($value = $user->settings()->whereUsettingId($setting->id)->first()->value)
+                    <strong>{{ $setting->name }}</strong>: {{ $value }}
+                    @else
+                    <strong>{{ $setting->name }}</strong>: {{ $setting->default  }}
+                    @endif
+                @endif
             @endforeach
         </div>
     </div>
