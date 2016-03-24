@@ -1,16 +1,15 @@
 <?php
 
+Route::get('fixtree', function () {
+    \Wislem\Berrier\Models\Category::fixTree();
+});
+
 Route::group(['middleware' => ['web']], function () {
     Route::get('admin/auth/login', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@getLogin']);
     Route::post('admin/auth/login', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@postLogin']);
+    Route::get('admin/auth/logout', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@getLogout']);
 
     Route::group(['prefix' => 'admin', 'namespace' => 'Wislem\Berrier\Http\Controllers', 'middleware' => ['berrier.auth']], function () {
-        Route::get('admin/auth/logout', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@getLogout']);
-
-        Route::get('fixtree', function () {
-            \Wislem\Berrier\Models\Category::fixTree();
-        });
-
         Route::get('/', ['uses' => 'BerrierController@dashboard']);
         Route::post('ajax/slug-it', ['uses' => 'AjaxController@slugIt']);
 
