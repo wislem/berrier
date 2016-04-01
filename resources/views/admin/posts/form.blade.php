@@ -21,7 +21,11 @@
     {!! TranslatableBootForm::textarea('Content', 'content')->addClass('wysiwyg') !!}
     {!! TranslatableBootForm::textarea('Meta description', 'meta_desc') !!}
 
-    {!! BootForm::select('Categories', 'categories[]', $categories)->select($post->categories->pluck('id')->toArray())->attribute('multiple', 'multiple')->addClass('select2') !!}
+    @if($post)
+        {!! BootForm::select('Categories', 'categories[]', $categories)->select($post->categories()->pluck('id')->toArray())->attribute('multiple', 'multiple')->addClass('select2') !!}
+    @else
+        {!! BootForm::select('Categories', 'categories[]', $categories)->attribute('multiple', 'multiple')->addClass('select2') !!}
+    @endif
 
     <div class="row">
         <div class="col-xs-12">
