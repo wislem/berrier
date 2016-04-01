@@ -49,7 +49,7 @@ class PostController extends Controller
 
 //        $results = $this->post->search($searchPhrase);
 
-        $results = $this->post->join('post_translations as t', 't.post_id', '=', 'post_id')->where('locale', '=', config('app.locale'));
+        $results = $this->post->join('post_translations as t', 't.post_id', '=', 'post_id')->where('locale', '=', config('app.locale'))->groupBy('pages.id')->with('translations');
 
         if($searchPhrase) {
             $results = $results->with('categories')
