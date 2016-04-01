@@ -61,7 +61,7 @@ var CompNestable = function() {
                 if (label == '') {
                     custom_label.after('<span class="help-block">Required</span>');
                 }
-                updateOutput(nestList3.data('output', $('input[name="menuitems"]')));
+                updateOutput(nestList3.data('output', $('input[name="items"]')));
                 custom_link.val('');
                 custom_label.val('');
                 custom_target.val('_blank');
