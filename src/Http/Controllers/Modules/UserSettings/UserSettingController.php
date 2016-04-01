@@ -16,7 +16,7 @@ class UserSettingController extends Controller
     {
         $this->setting = $setting;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -125,11 +125,11 @@ class UserSettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateUserSettingRequest  $request
+     * @param  Requests\UpdateUserSettingRequest  $request
      * @param  int  $id
      * @return Response
      */
-    public function update(UpdateUserSettingRequest $request, $id)
+    public function update(Requests\UpdateUserSettingRequest $request, $id)
     {
         $setting = $this->setting->findOrFail($id);
 

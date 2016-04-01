@@ -8,5 +8,6 @@ class PageTranslation extends Model
 
     public $timestamps = false;
     protected $fillable = ['slug', 'title', 'content', 'meta_desc'];
+    protected $primaryKey = 't_id';
 
 }

@@ -14,7 +14,7 @@ class CreatePageTranslationsTable extends Migration {
 	{
 		Schema::create('page_translations', function(Blueprint $table)
 		{
-			$table->increments('id');
+			$table->increments('t_id');
 			$table->integer('page_id')->unsigned()->nullable();
 			$table->string('slug')->nullable()->index('slug');
 			$table->string('title')->nullable();

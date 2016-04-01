@@ -9,5 +9,6 @@ class CategoryTranslation extends Model
 
     public $timestamps = false;
     protected $fillable = ['slug', 'name'];
+    protected $primaryKey = 't_id';
 
 }
