@@ -28,7 +28,7 @@ var CompNestable = function() {
             nestList3.nestable({
                 group: 1
             }).on('change', updateOutput);
-            updateOutput(nestList3.data('output', $('input[name="menuitems"]')));
+            updateOutput(nestList3.data('output', $('input[name="items"]')));
             $('#nestable-actions > a').on('click', function(e) {
                 var nestAction = $(this).data('action');
                 if (nestAction == 'collapse') {
