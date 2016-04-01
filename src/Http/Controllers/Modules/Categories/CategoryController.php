@@ -69,7 +69,8 @@ class CategoryController extends Controller
         $targetCategory = ($request->has('parent_id')) ? Category::findOrFail($request->parent_id) : Category::root();
 
         // append category to root
-        if ( $status = $sourceCategory->appendTo($targetCategory)->save() ) {
+        if ( $status = $sourceCategory->appendToNode($targetCategory)->save() ) {
+            Category::fixTree();
             DB::commit();
             $response['msg'] = 'Saved successfully';
             $response['name'] = $sourceCategory->name;
@@ -124,10 +125,13 @@ class CategoryController extends Controller
         DB::beginTransaction();
 
         $category = Category::findOrFail($id);
+        $target =
         $status = $category->update($request->all());
 
         if($status) {
-            Category::fixTree();
+            if(Category::isBroken()) {
+                Category::fixTree();
+            }
             DB::commit();
         }else {
             DB::rollback();
@@ -153,7 +157,7 @@ class CategoryController extends Controller
         if ($sourceCategory and $targetCategory and ($sourceCategory->parent_id == $request->parent_id)) {
             switch ($request->direction) {
                 case "inside" :
-                    $status = $sourceCategory->prependTo($targetCategory)->save();
+                    $status = $sourceCategory->prependToNode($targetCategory)->save();
                     break;
                 case "before" :
                     $status = $sourceCategory->beforeNode($targetCategory)->save();
@@ -164,6 +168,9 @@ class CategoryController extends Controller
             }
 
             if ($status) {
+                if(Category::isBroken()) {
+                    Category::fixTree();
+                }
                 DB::commit();
                 $response['msg'] = 'Moved successfully';
                 $response['name'] = $request->name;
@@ -196,11 +203,13 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
             $category->delete();
+
+            if(Category::isBroken()) {
+                Category::fixTree();
+            }
         } catch (\Exception $e) {
             return redirect('admin/categories')->withErrors(['general' => 'Something went wrong: ' . $e->getMessage()]);
         }
-
-        Category::fixTree();
 
         return redirect('admin/categories')->with('success', 'Category deleted successfully');
     }
