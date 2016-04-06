@@ -32,7 +32,7 @@ class PageFrontController extends Controller
         $object->content = str_replace('{{url}}', \Request::url(), $object->content);
         $widgets = Widget::extract_unit($object->content, '{{', '}}');
         foreach($widgets as $bbcode => $widget) {
-            $object->content = str_replace('{{' . $bbcode . '}}', $widget, $page->content);
+            $object->content = str_replace('{{' . $bbcode . '}}', $widget, $object->content);
         }
 
         if(\View::exists('berrier::themes.' . config('berrier.theme.name') . '.custom.' . $slug)) {

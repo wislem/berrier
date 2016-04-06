@@ -16,7 +16,8 @@ class PostFrontController extends Controller
 
     public function index($slug)
     {
-        $object = $this->object->select('id', 'slug', 'title', 'content', 'meta_desc', 'media', 'categories')->active()->whereSlug($slug)->first();
+        $object = $this->object->join('post_translations as t', 't.post_id', '=', 'posts.id')
+            ->select('id', 'slug', 'title', 'content', 'meta_desc')->active()->whereSlug($slug)->first();
 
         if(!$object) {
             App::abort(404);
