@@ -1,7 +1,7 @@
 <?php
 namespace Wislem\Berrier\Http\Controllers\Modules\Widgets\Facades;
 
-
+use Wislem\Berrier\Models\Widget as WidgetModel;
 
 class Widget
 {
@@ -13,9 +13,9 @@ class Widget
 //            $merged = Cache::tags('widgets')->get($page . '-' . $position);
 //        }else {
             if ($page == 'null') {
-                $merged = Widget::select('id', 'title', 'content', 'path')->active()->global()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
+                $merged = WidgetModel::select('id', 'title', 'content', 'path')->active()->global()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
             } else {
-                $global = Widget::select('id', 'title', 'content', 'path')->active()->global()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
+                $global = WidgetModel::select('id', 'title', 'content', 'path')->active()->global()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
                 $specific = $page->widgets()->select('id', 'title', 'content', 'path')->local()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
 
                 $merged = $global->merge($specific);
@@ -32,7 +32,7 @@ class Widget
                     echo view($widget->path);
                 }
             }else {
-                echo str_replace('{{url}}', Request::url(), $widget->content);
+                echo str_replace('{{url}}', \Request::url(), $widget->content);
             }
         }
     }
