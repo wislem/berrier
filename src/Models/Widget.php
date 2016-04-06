@@ -10,15 +10,6 @@ class Widget extends Model
 
     protected $fillable = ['title', 'content', 'path', 'position', 'is_active', 'is_global', 'ordr'];
 
-    public static function boot()
-    {
-        parent::boot();
-
-        Widget::saved(function($widget){
-            \Cache::tags('widgets')->flush();
-        });
-    }
-
     public function pages()
     {
         return $this->morphedByMany(Page::class, 'widgetable');
