@@ -92,7 +92,7 @@ class WidgetController extends Controller
     public function create()
     {
         $widget = null;
-        $pages = Page::lists('title', 'id')->toArray();
+        $pages = Page::join('page_translations as t', 't.page_id', '=', 'pages.id')->lists('title', 'id')->toArray();
 
         return view('berrier::admin.widgets.create')
             ->with(compact('pages'))
@@ -135,7 +135,7 @@ class WidgetController extends Controller
     public function edit($id)
     {
         $widget = $this->widget->findOrFail($id);
-        $pages = Page::lists('title', 'id')->toArray();
+        $pages = Page::join('page_translations as t', 't.page_id', '=', 'pages.id')->lists('title', 'id')->toArray();
 
         return view('berrier::admin.widgets.edit')
             ->with(compact('pages'))
