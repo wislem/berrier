@@ -6,19 +6,21 @@
 @endif
 <div class="box-body">
 
-    {!! BootForm::text('title', 'Title') !!}
-    {!! BootForm::textarea('content', 'Content')->addClass('codemirror') !!}
-    {!! BootForm::text('path', 'Path to widget script (blade style)')->placeholder('E.g. widgets.my_widget') !!}
+    {!! BootForm::checkbox('Visible', 'is_active')->defaultToChecked() !!}
+    {!! BootForm::checkbox('Global', 'is_global')->defaultToChecked() !!}
+
+    {!! BootForm::text('Title', 'title') !!}
+    {!! BootForm::textarea('Content', 'content')->addClass('codemirror') !!}
+    {!! BootForm::text('Path to widget script (blade style)', 'path')->placeholder('E.g. widgets.my_widget') !!}
     @if($widget)
-        {!! BootForm::select('pages[]', 'Appear in Pages', ['' => '---'] + $pages)->select($widget->pages()->lists('id')->toArray())->addClass('select2') !!}
+        {!! BootForm::select('Appear in Pages', 'pages[]', ['' => '---'] + $pages)->select($widget->pages()->lists('id')->toArray())->addClass('select2') !!}
     @else
-        {!! BootForm::select('pages[]', 'Appear in Pages', ['' => '---'] + $pages)->addClass('select2') !!}
+        {!! BootForm::select('Appear in Pages', 'pages[]', ['' => '---'] + $pages)->addClass('select2') !!}
     @endif
 
-    {!! BootForm::select('position', 'Position', ['' => '---'] + config('berrier.theme.widget_positions'))->addClass('select2') !!}
-    {!! BootForm::text('ordr', 'Order of appearance') !!}
-    {!! BootForm::checkbox('is_active', 'Visible')->defaultToChecked() !!}
-    {!! BootForm::checkbox('is_global', 'Global')->defaultToChecked() !!}
+    {!! BootForm::select('Position', 'position', ['' => '---'] + config('berrier.theme.widget_positions'))->addClass('select2') !!}
+    {!! BootForm::text('Order of appearance', 'ordr') !!}
+
 </div>
 
 <div class="box-footer">
