@@ -6,29 +6,29 @@ use Wislem\Berrier\Models\Category;
 
 class CategoryFrontController extends Controller
 {
-    protected $category;
+    protected $object;
 
-    public function __construct(Category $category)
+    public function __construct(Category $object)
     {
-        $this->category = $category;
+        $this->object = $object;
     }
 
     public function index($slug = '')
     {
-        $category = $this->category->join('category_translations as t', 't.category_id', '=', 'categories id')
+        $object = $this->object->join('category_translations as t', 't.category_id', '=', 'categories id')
             ->whereSlug($slug)->first();
 
         $meta = [
-            'title' => $category->name,
-            'desc' => $category->name
+            'title' => $object->name,
+            'desc' => $object->name
         ];
 
-        if(!$category) {
+        if(!$object) {
             \App::abort(404);
         }
 
-        $posts = Post::whereHas('categories', function($q) use ($category) {
-            $q->whereIn('id', $category->getChildren()->pluck('id')->toArray());
+        $posts = Post::whereHas('categories', function($q) use ($object) {
+            $q->whereIn('id', $object->getChildren()->pluck('id')->toArray());
         })->active()->orderBy('updated_at', 'DESC')->paginate(12);
 
         if(\View::exists('berrier::themes.' . config('berrier.theme.name') . '.custom.' . $slug)) {
