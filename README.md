@@ -35,8 +35,33 @@ Publish various files needed
 Run ```composer dump-autoload```
 
 #### Step 5
+Change your database/DatabaseSeeder.php to this:
+```php
+<?php
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call(UsersTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
+    }
+}
+```
+
 Delete default migrations of Laravel 5 inside ```database/migrations```
+
 Run ```php artisan migrate```
+
 Run ```php artisan db:seed```
 
 #### Step 6
