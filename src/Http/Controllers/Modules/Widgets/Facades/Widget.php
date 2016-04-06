@@ -9,9 +9,9 @@ class Widget
     {
         $page = (!$page) ? 'null' : $page;
 
-        if(Cache::tags('widgets')->has($page . '-' . $position)) {
-            $merged = Cache::tags('widgets')->get($page . '-' . $position);
-        }else {
+//        if(Cache::tags('widgets')->has($page . '-' . $position)) {
+//            $merged = Cache::tags('widgets')->get($page . '-' . $position);
+//        }else {
             if ($page == 'null') {
                 $merged = Widget::select('id', 'title', 'content', 'path')->active()->global()->wherePosition($position)->orderBy('ordr', 'ASC')->get();
             } else {
@@ -23,8 +23,8 @@ class Widget
 
             $merged->sortBy('ordr');
 
-            Cache::tags('widgets')->forever($page . '-' . $position, $merged);
-        }
+//            Cache::tags('widgets')->forever($page . '-' . $position, $merged);
+//        }
 
         foreach($merged as $widget) {
             if($widget->path) {
