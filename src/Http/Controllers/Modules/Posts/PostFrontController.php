@@ -7,34 +7,34 @@ use Wislem\Berrier\Models\Post;
 class PostFrontController extends Controller
 {
 
-    protected $post;
+    protected $object;
 
-    public function __construct(Post $post)
+    public function __construct(Post $object)
     {
-        $this->post = $post;
+        $this->object = $object;
     }
 
     public function index($slug)
     {
-        $post = $this->post->select('id', 'slug', 'title', 'content', 'meta_desc', 'media', 'categories')->active()->whereSlug($slug)->first();
+        $object = $this->object->select('id', 'slug', 'title', 'content', 'meta_desc', 'media', 'categories')->active()->whereSlug($slug)->first();
 
-        if(!$post) {
+        if(!$object) {
             App::abort(404);
         }
 
         $meta = [
-            'title' => $post->title,
-            'desc' => $post->meta_desc
+            'title' => $object->title,
+            'desc' => $object->meta_desc
         ];
 
         if(\View::exists('berrier::themes.' . config('berrier.theme.name') . '.custom.' . $slug)) {
             return view('berrier::themes.' . config('berrier.theme.name') . '.custom.' . $slug)
-                ->with(compact('page'))
+                ->with(compact('object'))
                 ->with(compact('meta'));
         }
 
         return view('berrier::themes.' . config('berrier.theme.name') . '.post')
-            ->with(compact('post'))
+            ->with(compact('object'))
             ->with(compact('meta'));
     }
 
