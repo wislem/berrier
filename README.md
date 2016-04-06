@@ -79,11 +79,6 @@ class User extends \Wislem\Berrier\Models\User
 ```
 
 #### Step 7
-Log in ```http://your.path/admin``` using
-Email: admin@example.com
-Password: admin
-
-#### Step 8
 Edit the locales inside ```config/translatable.php``` to look like this
 ``` php
     'locales' => [
@@ -97,6 +92,11 @@ Also change the config('app.url') to your proper url so that you can move to you
 website through Berrier's list pages.
 
 Make sure to check the published ```config/berrier.php``` file for more options.
+
+#### Step 8
+Log in ```http://your.path/admin``` using
+Email: admin@example.com
+Password: admin
 
 ## Enjoy!
 
