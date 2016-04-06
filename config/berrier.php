@@ -1,15 +1,15 @@
 <?php
-
+// 0:Member, 1:Moderator, 2:Administrator
 return [
-    'user_model' => '\Wislem\Berrier\Models\User',
+    'user_model' => '\App\User',
     'permissions' => [
         'modules' => [
-            'pages' => 'mod:0',
-            'posts' => 'mod:1',
-            'categories' => 'mod:0',
-            'settings' => 'mod:0',
-            'users' => 'mod:0',
-            'blocks' => 'mod:1'
+            'pages' => [1,2],
+            'posts' => [1,2],
+            'categories' => [2],
+            'settings' => [2],
+            'users' => [2],
+            'blocks' => [1,2]
         ]
     ],
     'theme' => [
