@@ -93,9 +93,14 @@ class WidgetController extends Controller
     {
         $widget = null;
         $pages = Page::join('page_translations as t', 't.page_id', '=', 'pages.id')->lists('title', 'id')->toArray();
+        $posts = Post::join('post_translations as t', 't.post_id', '=', 'posts.id')->lists('title', 'id')->toArray();
+        $categories_tree = Category::withDepth()->defaultOrder()->descendantsOf(1)->linkNodes();
+        $categories = renderTreeToOptions($categories_tree);
 
         return view('berrier::admin.widgets.create')
             ->with(compact('pages'))
+            ->with(compact('categories'))
+            ->with(compact('posts'))
             ->with(compact('widget'));
     }
 
@@ -107,11 +112,24 @@ class WidgetController extends Controller
      */
     public function store(WidgetRequest $request)
     {
+        $checkboxes = ['is_active', 'is_global'];
+        foreach($checkboxes as $chk) {
+            if(!$request->has($chk)) {
+                $request->merge([$chk => 0]);
+            }
+        }
+
         DB::beginTransaction();
 
         if($widget = $this->widget->create($request->except('_token', 'pages'))) {
             if($request->pages) {
                 $widget->pages()->sync($request->pages);
+            }
+            if($request->posts) {
+                $widget->posts()->sync($request->posts);
+            }
+            if($request->categories) {
+                $widget->categories()->sync($request->categories);
             }
 
             DB::commit();
@@ -135,10 +153,14 @@ class WidgetController extends Controller
     public function edit($id)
     {
         $widget = $this->widget->findOrFail($id);
-        $pages = Page::join('page_translations as t', 't.page_id', '=', 'pages.id')->lists('title', 'id')->toArray();
+        $posts = Post::join('post_translations as t', 't.post_id', '=', 'posts.id')->lists('title', 'id')->toArray();
+        $categories_tree = Category::withDepth()->defaultOrder()->descendantsOf(1)->linkNodes();
+        $categories = renderTreeToOptions($categories_tree);
 
         return view('berrier::admin.widgets.edit')
             ->with(compact('pages'))
+            ->with(compact('categories'))
+            ->with(compact('posts'))
             ->with(compact('widget'));
     }
 
@@ -165,6 +187,13 @@ class WidgetController extends Controller
             if($request->pages) {
                 $widget->pages()->sync($request->pages);
             }
+            if($request->posts) {
+                $widget->posts()->sync($request->posts);
+            }
+            if($request->categories) {
+                $widget->categories()->sync($request->categories);
+            }
+
             DB::commit();
 
             Cache::forget('widgets');
@@ -190,7 +219,7 @@ class WidgetController extends Controller
         $widget = $this->widget->findOrFail($id);
 
         if($widget->delete()) {
-            $msg = 'Widget was deleted succesfully';
+            $msg = 'Widget was deleted successfully';
             $msg_type = 'success';
         }else {
             $msg = 'Something went wrong';

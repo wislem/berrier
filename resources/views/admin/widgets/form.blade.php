@@ -14,8 +14,12 @@
     {!! BootForm::text('Path to widget script (blade style)', 'path')->placeholder('E.g. widgets.my_widget') !!}
     @if($widget)
         {!! BootForm::select('Appear in Pages', 'pages[]', ['' => '---'] + $pages)->select($widget->pages()->lists('id')->toArray())->addClass('select2') !!}
+        {!! BootForm::select('Appear in Categories', 'categories[]', ['' => '---'] + $categories)->select($widget->categories()->lists('id')->toArray())->addClass('select2') !!}
+        {!! BootForm::select('Appear in Posts', 'posts[]', ['' => '---'] + $posts)->select($widget->posts()->lists('id')->toArray())->addClass('select2') !!}
     @else
         {!! BootForm::select('Appear in Pages', 'pages[]', ['' => '---'] + $pages)->addClass('select2') !!}
+        {!! BootForm::select('Appear in Categories', 'categories[]', ['' => '---'] + $categories)->addClass('select2') !!}
+        {!! BootForm::select('Appear in Posts', 'posts[]', ['' => '---'] + $posts)->addClass('select2') !!}
     @endif
 
     {!! BootForm::select('Position', 'position', ['' => '---'] + config('berrier.theme.widget_positions'))->addClass('select2') !!}
