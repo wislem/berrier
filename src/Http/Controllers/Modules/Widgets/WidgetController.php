@@ -3,7 +3,9 @@
 namespace Wislem\Berrier\Http\Controllers\Modules\Widgets;
 
 use Wislem\Berrier\Http\Requests\WidgetRequest;
+use Wislem\Berrier\Models\Category;
 use Wislem\Berrier\Models\Page;
+use Wislem\Berrier\Models\Post;
 use Wislem\Berrier\Models\Widget;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -153,6 +155,7 @@ class WidgetController extends Controller
     public function edit($id)
     {
         $widget = $this->widget->findOrFail($id);
+        $pages = Page::join('page_translations as t', 't.page_id', '=', 'pages.id')->lists('title', 'id')->toArray();
         $posts = Post::join('post_translations as t', 't.post_id', '=', 'posts.id')->lists('title', 'id')->toArray();
         $categories_tree = Category::withDepth()->defaultOrder()->descendantsOf(1)->linkNodes();
         $categories = renderTreeToOptions($categories_tree);
