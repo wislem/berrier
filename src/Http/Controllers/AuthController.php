@@ -77,6 +77,8 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+            $user = Auth::user();
+
             $user->ip = $request->ip();
             $user->last_login = Carbon::now();
             $user->save();
@@ -107,7 +109,7 @@ class AuthController extends Controller
      */
     public function getLogout()
     {
-        \Session::flush();
+        Session::flush();
         return $this->logout();
     }
 

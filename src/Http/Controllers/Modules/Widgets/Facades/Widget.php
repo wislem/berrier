@@ -2,6 +2,7 @@
 namespace Wislem\Berrier\Http\Controllers\Modules\Widgets\Facades;
 
 use Wislem\Berrier\Models\Widget as WidgetModel;
+use View;
 
 class Widget
 {
@@ -28,7 +29,7 @@ class Widget
 
         foreach($merged as $widget) {
             if($widget->path) {
-                if(\View::exists($widget->path)) {
+                if(View::exists($widget->path)) {
                     echo view($widget->path);
                 }
             }else {
@@ -48,10 +49,10 @@ class Widget
 
         foreach($unit as $widget) {
             $split = explode(':', $widget);
-            $db_widget = \Wislem\Berrier\Models\Widget::find($split[1]);
+            $db_widget = WidgetModel::find($split[1]);
             if($db_widget) {
                 if ($db_widget->path) {
-                    if (\View::exists($db_widget->path)) {
+                    if (View::exists($db_widget->path)) {
                         $result[$widget] = view($db_widget->path);
                     }
                 } else {
