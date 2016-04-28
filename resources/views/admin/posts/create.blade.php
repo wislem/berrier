@@ -85,7 +85,7 @@
 
             mediaZone.on('sending', function(file, xhr, formData) {
                 $('#media').find('.dz-message').css('display', 'none');
-                formData.append('type', 'media');
+                formData.append('folder', 'posts');
                 formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
             });
 

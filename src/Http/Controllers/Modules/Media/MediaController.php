@@ -35,7 +35,7 @@ class MediaController extends Controller
             if ($request->hasFile('file')) {
 
                 $file = $request->file('file');
-                $path = '/public/uploads/posts/' . date('Y-m-d');
+                $path = '/public/uploads/' . $request->folder . '/' . date('Y-m-d');
                 $destination = storage_path('app' . $path);
                 $hashed = sha1(Str::slug($file->getClientOriginalName() . time())) . '.' . $file->getClientOriginalExtension();
 
