@@ -32,13 +32,13 @@ class BerrierServiceProvider extends ServiceProvider
         $this->app->register('Propaganistas\LaravelTranslatableBootForms\TranslatableBootFormsServiceProvider');
         $this->app->register('Wislem\Berrier\Providers\BerrierAuthServiceProvider');
         $this->app->register('Caffeinated\Menus\MenusServiceProvider');
-        $this->app->register('Folklore\Image\ImageServiceProvider');
+        $this->app->register('Bkwld\Croppa\ServiceProvider');
 
         // Load Aliases
         $loader = AliasLoader::getInstance();
         $loader->alias('Widget', 'Wislem\Berrier\Http\Controllers\Modules\Widgets\Facades\Widget');
         $loader->alias('Menu', 'Caffeinated\Menus\Facades\Menu');
-        $loader->alias('Image', 'Folklore\Image\Facades\Image');
+        $loader->alias('Croppa', 'Bkwld\Croppa\Facade');
         $loader->alias('BootForm', 'AdamWathan\BootForms\Facades\BootForm');
         $loader->alias('TranslatableBootForm', 'Propaganistas\LaravelTranslatableBootForms\Facades\TranslatableBootForm');
 
