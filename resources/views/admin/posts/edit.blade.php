@@ -45,7 +45,7 @@
 
             @foreach($post->media()->get() as $medium)
                 @if(\File::exists(storage_path().'/app'.$medium->path))
-                    mockFiles.push({ name: '{{basename($medium->path)}}', size: '{{\File::size(storage_path().'/app'.$medium->path)}}', path: '{{$medium->path}}', thumb: '{{Image::url($medium->path, 120, 120, ['crop'])}}' });
+                    mockFiles.push({ name: '{{basename($medium->path)}}', size: '{{\File::size(storage_path().'/app'.$medium->path)}}', path: '{{$medium->path}}', thumb: '{{Croppa::url($medium->path, 120, 120)}}' });
                     @endif
                 @endforeach
             @endif

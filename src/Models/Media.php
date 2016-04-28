@@ -16,7 +16,7 @@ class Media extends Model
 
         Media::deleting(function($medium){
             //Delete the actual file from disk
-            \File::delete(storage_path().'/app'.$medium->path);
+            \File::delete(storage_path().'/public'.$medium->path);
         });
     }
 

@@ -35,13 +35,15 @@ class MediaController extends Controller
             if ($request->hasFile('file')) {
 
                 $file = $request->file('file');
-                $path = '/uploads/posts/' . date('Y-m-d');
+                $path = '/public/uploads/posts/' . date('Y-m-d');
                 $destination = storage_path('app' . $path);
                 $hashed = sha1(Str::slug($file->getClientOriginalName() . time())) . '.' . $file->getClientOriginalExtension();
 
                 if (!\File::exists($destination)) {
                     \File::makeDirectory($destination);
                 }
+
+                $path = str_replace('/public', '', $path);
 
                 if ($file->move($destination, $hashed)) {
                     $medium = $this->medium->create([
@@ -53,7 +55,7 @@ class MediaController extends Controller
                         $response['path'] = $path.'/'.$hashed;
                         return response($response, 200);
                     }
-                    // TODO: ln -s /path/to/public_html/storage/app/uploads /path/to/public_html/public/uploads
+                    // TODO: ln -s /path/to/public_html/storage/app/public/uploads /path/to/public_html/public/uploads
                 }
             }
         }
