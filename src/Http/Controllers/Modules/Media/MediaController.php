@@ -35,17 +35,21 @@ class MediaController extends Controller
             if ($request->hasFile('file')) {
 
                 $file = $request->file('file');
-                $path = '/public/uploads/' . $request->folder . '/' . date('Y-m-d');
-                $destination = storage_path('app' . $path);
+                $folder = '/public/uploads/' . $request->folder;
+                if (!\Storage::exists($folder)) {
+                    \Storage::makeDirectory($folder);
+                }
+                $path = $folder . '/' . date('Y-m-d');
                 $hashed = sha1(Str::slug($file->getClientOriginalName() . time())) . '.' . $file->getClientOriginalExtension();
 
-                if (!\File::exists($destination)) {
-                    \File::makeDirectory($destination);
+                if (!\Storage::exists($path)) {
+                    \Storage::makeDirectory($path);
                 }
 
-                $path = str_replace('/public', '', $path);
+                if ($file->move(storage_path('app') . $path, $hashed)) {
 
-                if ($file->move($destination, $hashed)) {
+                    $path = str_replace('/public', '', $path);
+
                     $medium = $this->medium->create([
                         'path' => $path . '/' . $hashed
                     ]);
