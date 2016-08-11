@@ -18,10 +18,15 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wislem/Laravel-Translatable-Bootforms"
+        }
+    ],
     "require": {
         "illuminate/support": "^5.2",
         "php" : ">=5.5.9",
-        "propaganistas/laravel-translatable-bootforms": "~1.1",
         "devfactory/minify": "1.0.*",
         "caffeinated/menus": "~2.0",
         "kalnoy/nestedset": "^4.0",
