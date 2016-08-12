@@ -31,13 +31,9 @@ to your ```config/app.php``` file
 Publish various files needed
 ```php artisan vendor:publish```
 
-Install multiple-locales package
-```php artisan multiple-locales:install```
-Run php artisan multiple-locales:install to install the package.
-
 Update the locales and skip_locales array with your locales in config/app.php:
 ```php 'locales' => ['en' => 'English', 'nl' => 'Dutch'],
-'skip_locales' => ['admin', 'api'],```
+'skip_locales' => ['admin', 'api', 'assets', '_debugbar'],```
 
 #### Step 4
 Run ```composer dump-autoload```

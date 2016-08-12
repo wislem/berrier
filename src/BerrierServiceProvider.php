@@ -61,7 +61,9 @@ class BerrierServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(resource_path().'/lang/berrier', 'berrier');
 
         // Run artisan commands
-        // \Artisan::call('multiple-locales:install');
+        \Artisan::call('multiple-locales:install');
+        // Set app.skip_locales so that the site assets and debug stuff load properly (with no {locale} prefix) 
+        \Config::set('app.skip_locales', ['admin', 'api', 'assets', '_debugbar']);
 
         // View Composers
         setlocale(LC_TIME, config('app.locale'));
