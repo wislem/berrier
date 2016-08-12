@@ -21,7 +21,7 @@ class PageFrontController extends Controller
             ->select('id', 'slug', 'title', 'content', 'meta_desc')->active()->whereSlug($slug)->first();
 
         if(!$object) {
-            App::abort(404);
+            \App::abort(404);
         }
 
         $meta = [
