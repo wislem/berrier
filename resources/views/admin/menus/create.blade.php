@@ -14,7 +14,7 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-10 col-md-12">
                 @include('berrier::admin.menus.form', ['menu' => $menu])
             </div>
         </div>

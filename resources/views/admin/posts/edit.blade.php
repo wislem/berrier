@@ -15,7 +15,7 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-10 col-md-12">
                 <div class="box box-success">
                     @include('berrier::admin.posts.form', ['post' => $post])
                 </div>

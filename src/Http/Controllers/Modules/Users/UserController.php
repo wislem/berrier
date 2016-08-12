@@ -162,12 +162,16 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($id);
 
-        if ($request->has('password')) {
-            $request->merge(['password' => bcrypt($request->password)]);
-        }
         $request->merge(['last_login' => ($request->last_login) ? $request->last_login : null]);
 
-        if($user->update($request->except('_token'))) {
+        if ($request->get('password') != '') {
+            $request->merge(['password' => bcrypt($request->password)]);
+            $data = $request->all();
+        }else {
+            $data = $request->except('password');
+        }
+        
+        if($user->update($data)) {
             if($request->has('settings')) {
                 $user_settings = [];
                 foreach ($request->settings as $id => $value) {
