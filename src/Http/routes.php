@@ -34,7 +34,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('media', 'Modules\Media\MediaController', ['only' => ['store', 'destroy']]);
     });
 
-    Route::get('{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Pages\PageFrontController@index']);
-    Route::get('p/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Posts\PostFrontController@index']);
-    Route::get('c/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Categories\CategoryFrontController@index']);
+    $locale = App::getLocale();
+    Route::group(['prefix' => $locale], function(){
+        Route::get('{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Pages\PageFrontController@index']);
+        Route::get('p/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Posts\PostFrontController@index']);
+        Route::get('c/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Categories\CategoryFrontController@index']);
+    });
 });

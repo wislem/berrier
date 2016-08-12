@@ -22,8 +22,8 @@ class BerrierServiceProvider extends ServiceProvider
         }
 
         // Load Package Middleware
-        $kernel = app('Illuminate\Contracts\Http\Kernel');
-        $kernel->pushMiddleware('Wislem\Berrier\Http\Middleware\MenuMiddleware');
+//        $kernel = app('Illuminate\Contracts\Http\Kernel');
+//        $kernel->pushMiddleware('Wislem\Berrier\Http\Middleware\MenuMiddleware');
         $this->app['router']->middleware('berrier.auth', 'Wislem\Berrier\Http\Middleware\BerrierAuth');
 
         // Register Service providers
@@ -33,6 +33,7 @@ class BerrierServiceProvider extends ServiceProvider
         $this->app->register('Wislem\Berrier\Providers\BerrierAuthServiceProvider');
         $this->app->register('Caffeinated\Menus\MenusServiceProvider');
         $this->app->register('Bkwld\Croppa\ServiceProvider');
+        $this->app->register('DidierDeMaeyer\MultipleLocales\Providers\MultipleLocalesServiceProvider');
 
         // Load Aliases
         $loader = AliasLoader::getInstance();
