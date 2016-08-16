@@ -21,6 +21,8 @@
     {!! TranslatableBootForm::textarea('Content', 'content')->addClass('wysiwyg') !!}
     {!! TranslatableBootForm::textarea('Meta description', 'meta_desc') !!}
 
+    {!! BootForm::hidden('folder')->value('editor')->attribute('id', 'uploadFolder') !!}
+    {!! BootForm::hidden('_token')->value(csrf_token())->attribute('id', 'token') !!}
 </div>
 
 <div class="box-footer">

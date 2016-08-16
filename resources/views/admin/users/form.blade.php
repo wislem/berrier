@@ -16,7 +16,7 @@
 
             {!! BootForm::select('Gender', 'gender')->options(['0' => '---', '1' => 'Male', '2' => 'Female'])->addClass('select2') !!}
             {!! BootForm::text('Birthday', 'birthday')->addClass('date') !!}
-            {!! BootForm::select('Role', 'role')->options(['0' => 'Member', '1' => 'Moderator', '2' => 'Administrator'])->addClass('select2') !!}
+            {!! BootForm::select('Role', 'role')->options(['0' => 'Client', '1' => 'Expert', '2' => 'Account Manager', '3' => 'Administrator'])->addClass('select2') !!}
             {!! BootForm::select('Status', 'status')->options(['0' => 'Inactive', '1' => 'Active', '2' => 'Banned'])->addClass('select2') !!}
             {!! BootForm::textarea('Reason for ban', 'banned_reason') !!}
             {!! BootForm::text('Last seen IP', 'ip')->attribute('readonly', 'readonly') !!}

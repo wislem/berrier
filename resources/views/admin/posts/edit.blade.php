@@ -26,10 +26,6 @@
 
 @section('js')
 @section('js')
-    <script src="{{asset('admin_assets/plugins/redactor/redactor.min.js')}}"></script>
-    <script src="{{asset('admin_assets/plugins/redactor/plugins/table/table.js')}}"></script>
-    <script src="{{asset('admin_assets/plugins/redactor/plugins/video/video.js')}}"></script>
-
     <script src="{{asset('admin_assets/dist/js/pages/form.js')}}"></script>
 
     <script src="{{asset('admin_assets/plugins/dropzone/dropzone.js')}}"></script>

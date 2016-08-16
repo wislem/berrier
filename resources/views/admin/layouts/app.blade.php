@@ -95,6 +95,11 @@
             </script>
         @endif
 
+        <script src="{{asset('admin_assets/plugins/redactor/redactor.min.js')}}"></script>
+        <script src="{{asset('admin_assets/plugins/redactor/plugins/table/table.js')}}"></script>
+        <script src="{{asset('admin_assets/plugins/redactor/plugins/video/video.js')}}"></script>
+        <script src="{{asset('admin_assets/plugins/redactor/plugins/properties/properties.js')}}"></script>
+
         @yield('js')
 
     </body>

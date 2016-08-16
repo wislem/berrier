@@ -23,7 +23,13 @@ $(function () {
             minHeight: 200,
             replaceDivs: false,
             buttonSource: true,
-            plugins: ['table', 'video']
+            plugins: ['table', 'video', 'imagemanager', 'properties'],
+            clipboardUploadUrl: '/admin/ajax/upload',
+            imageUpload: '/admin/ajax/upload',
+            uploadImageFields: {
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+                'folder': $('#uploadFolder').val()
+            }
             // TODO: image uploading on redactor!
         });
     }
@@ -58,12 +64,12 @@ $(function () {
     }
 
     $('.date').datetimepicker({
-        locale: 'el',
+        locale: 'en',
         format: 'YYYY-MM-DD'
     });
 
     $('.datetime').datetimepicker({
-        locale: 'el',
+        locale: 'en',
         sideBySide: true,
         format: 'YYYY-MM-DD HH:mm'
     });
