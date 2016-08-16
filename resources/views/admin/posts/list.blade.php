@@ -54,7 +54,7 @@
 <script>
     var grid_url = '/admin/posts';
     var grid_view_front = true;
-    var grid_view_front_url = '{{ config('app.url') }}/p';
+    var grid_view_front_url = '{{ config('app.url') . '/' . config('app.locale') . '/p' }}';
 </script>
 
 <script src="{{asset('admin_assets/plugins/bootgrid/laravel-bootgrid.js')}}"></script>
