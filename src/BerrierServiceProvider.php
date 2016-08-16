@@ -62,8 +62,8 @@ class BerrierServiceProvider extends ServiceProvider
 
         // Run artisan commands
         \Artisan::call('multiple-locales:install');
-        // Set app.skip_locales so that the site assets and debug stuff load properly (with no {locale} prefix) 
-        \Config::set('app.skip_locales', ['admin', 'api', 'assets', '_debugbar']);
+        // Set app.skip_locales so that the site assets and debug stuff load properly (with no {locale} prefix)
+        \Config::set('app.skip_locales', ['admin', 'api', 'assets', '_debugbar', 'uploads']);
 
         // View Composers
         setlocale(LC_TIME, config('app.locale'));

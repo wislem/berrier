@@ -31,10 +31,6 @@ to your ```config/app.php``` file
 Publish various files needed
 ```php artisan vendor:publish```
 
-Update the locales and skip_locales array with your locales in config/app.php:
-```php 'locales' => ['en' => 'English', 'nl' => 'Dutch'],
-'skip_locales' => ['admin', 'api', 'assets', '_debugbar'],```
-
 #### Step 4
 Run ```composer dump-autoload```
 
@@ -75,7 +71,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 ```
 and change
 ```php
-class User extends Authenticatable 
+class User extends Authenticatable
 ```
 to
 ```php
@@ -98,6 +94,14 @@ website through Berrier's list pages.
 Make sure to check the published ```config/berrier.php``` file for more options.
 
 #### Step 8
+Create a folder in the ```storage/app/public``` folder named ```uploads```
+Then run:
+```ln -s storage/app/public/uploads public/```
+
+Berrier uploads everything to the ```storage/app/public/uploads``` folder.
+Those uploads need to reside inside your /public folder so a link is necessary between the two.
+
+#### Step 9
 Log in ```http://your.path/admin``` using
 Email: admin@example.com
 Password: admin

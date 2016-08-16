@@ -36,7 +36,7 @@ class AjaxController extends Controller
                 if ($file->move(storage_path('app') . $path, $hashed)) {
                     $response['filelink'] = config('app.url') . str_replace('/public', '', $path) . '/' . $hashed;
                     return response($response, 200);
-                    // TODO: ln -s /path/to/public_html/storage/app/public/uploads /path/to/public_html/public/uploads
+                    // TODO: ln -s storage/app/public/uploads /path/to/public_html/public
                 }
             }
         }
