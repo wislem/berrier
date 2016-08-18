@@ -22,7 +22,7 @@ class Setting extends Model
             if(Cache::has('settings.'.$key)) {
                 $value = Cache::get('settings.'.$key);
             }else {
-                $value = Setting::whereKey($key)->pluck('value');
+                $value = Setting::whereKey($key)->value('value');
                 Cache::forever('settings.'.$key, $value);
             }
 
