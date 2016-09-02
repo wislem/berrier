@@ -33,7 +33,7 @@ class BerrierServiceProvider extends ServiceProvider
         $this->app->register('Wislem\Berrier\Providers\BerrierAuthServiceProvider');
         $this->app->register('Caffeinated\Menus\MenusServiceProvider');
         $this->app->register('Bkwld\Croppa\ServiceProvider');
-        $this->app->register('DidierDeMaeyer\MultipleLocales\Providers\MultipleLocalesServiceProvider');
+        $this->app->register('Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider');
 
         // Load Aliases
         $loader = AliasLoader::getInstance();
@@ -42,6 +42,7 @@ class BerrierServiceProvider extends ServiceProvider
         $loader->alias('Croppa', 'Bkwld\Croppa\Facade');
         $loader->alias('BootForm', 'AdamWathan\BootForms\Facades\BootForm');
         $loader->alias('TranslatableBootForm', 'Propaganistas\LaravelTranslatableBootForms\Facades\TranslatableBootForm');
+        $loader->alias('LaravelLocalization', 'Mcamara\LaravelLocalization\Facades\LaravelLocalization');
 
 
         // Publish stuff

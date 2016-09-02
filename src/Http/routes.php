@@ -1,15 +1,23 @@
 <?php
 
-Route::get('fixtree', function () {
-    \Wislem\Berrier\Models\Category::fixTree();
-});
-
 Route::group(['middleware' => ['web']], function () {
+
+    Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]], function() {
+        Route::get('{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Pages\PageFrontController@index']);
+        Route::get('p/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Posts\PostFrontController@index']);
+        Route::get('c/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Categories\CategoryFrontController@index']);
+    });
+
     Route::get('admin/auth/login', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@getLogin']);
     Route::post('admin/auth/login', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@postLogin']);
     Route::get('admin/auth/logout', ['uses' => 'Wislem\Berrier\Http\Controllers\AuthController@getLogout']);
 
     Route::group(['prefix' => 'admin', 'namespace' => 'Wislem\Berrier\Http\Controllers', 'middleware' => ['berrier.auth']], function () {
+
+        Route::get('fixtree', function () {
+            \Wislem\Berrier\Models\Category::fixTree();
+        });
+
         Route::get('/', ['uses' => 'BerrierController@dashboard']);
         Route::post('ajax/slug-it', ['uses' => 'AjaxController@slugIt']);
 
@@ -34,10 +42,4 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('media', 'Modules\Media\MediaController', ['only' => ['store', 'destroy']]);
     });
 
-    $locale = App::getLocale();
-    Route::group(['prefix' => $locale], function(){
-        Route::get('{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Pages\PageFrontController@index']);
-        Route::get('p/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Posts\PostFrontController@index']);
-        Route::get('c/{slug}', ['uses' => 'Wislem\Berrier\Http\Controllers\Modules\Categories\CategoryFrontController@index']);
-    });
 });
