@@ -41,8 +41,12 @@ class User extends Authenticatable
         return ($this->first_name or $this->last_name) ? $this->first_name . ' ' . $this->last_name : $this->nickname;
     }
 
-    public function notifications($is_read = 0)
+    public function notifications($is_read = null)
     {
-        return $this->hasMany(Notification::class)->where('is_read', '=', $is_read)->orderBy('created_at', 'DESC');
+        if($is_read === null) {
+            return $this->hasMany(Notification::class)->take(20)->orderBy('created_at', 'DESC');
+        }
+
+        return $this->hasMany(Notification::class)->where('is_read', '=', $is_read)->take(20)->orderBy('created_at', 'DESC');
     }
 }

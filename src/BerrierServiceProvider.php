@@ -16,11 +16,6 @@ class BerrierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Load routes if app is not caching routes.
-        if (!$this->app->routesAreCached()) {
-            require __DIR__.'/Http/routes.php';
-        }
-
         // Load Package Middleware
 //        $kernel = app('Illuminate\Contracts\Http\Kernel');
 //        $kernel->pushMiddleware('Wislem\Berrier\Http\Middleware\MenuMiddleware');
@@ -44,6 +39,10 @@ class BerrierServiceProvider extends ServiceProvider
         $loader->alias('TranslatableBootForm', 'Propaganistas\LaravelTranslatableBootForms\Facades\TranslatableBootForm');
         $loader->alias('LaravelLocalization', 'Mcamara\LaravelLocalization\Facades\LaravelLocalization');
 
+        // Load routes if app is not caching routes.
+        if (!$this->app->routesAreCached()) {
+            require __DIR__.'/Http/routes.php';
+        }
 
         // Publish stuff
         $this->publishes([
@@ -60,11 +59,6 @@ class BerrierServiceProvider extends ServiceProvider
 
         // Load translations
         $this->loadTranslationsFrom(resource_path().'/lang/berrier', 'berrier');
-
-        // Run artisan commands
-        \Artisan::call('multiple-locales:install');
-        // Set app.skip_locales so that the site assets and debug stuff load properly (with no {locale} prefix)
-        \Config::set('app.skip_locales', ['admin', 'api', 'assets', '_debugbar', 'uploads']);
 
         // View Composers
         setlocale(LC_TIME, config('app.locale'));
