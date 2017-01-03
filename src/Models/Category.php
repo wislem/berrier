@@ -3,12 +3,13 @@
 namespace Wislem\Berrier\Models;
 
 use Dimsav\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Kalnoy\Nestedset\Node;
+use Kalnoy\Nestedset\NodeTrait;
 
-class Category extends Node
+class Category extends Model
 {
-    use Translatable, Softdeletes;
+    use Translatable, Softdeletes, NodeTrait;
 
     protected $translatedAttributes = ['slug', 'name'];
     protected $fillable = ['slug', 'name', 'icon', 'parent_id', '_lft', '_rgt'];
